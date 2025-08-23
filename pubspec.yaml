@@ -32,7 +32,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
+  
+  #图片路径
   assets:
     - images/
 

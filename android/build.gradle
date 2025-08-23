@@ -1,7 +1,7 @@
+apply from: 'maven.gradle'
 allprojects {
     repositories {
-        google()
-        mavenCentral()
+        addCommonMaven(repositories)
     }
 }
 
