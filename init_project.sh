@@ -3,7 +3,7 @@
  # @Author: 魏
  # @Date: 2025-08-23
  # @LastEditors: weifucheng1102
- # @LastEditTime: 2025-08-23 10:27:29
+ # @LastEditTime: 2025-08-23 10:39:43
  # @FilePath: /flutter_template/init_project.sh
  # @Description: 初始化项目模板脚本 (支持 Android & iOS 包名/目录修改)
 ### 
@@ -16,15 +16,6 @@ NEW_NAME=$2
 if [ -z "$NEW_PACKAGE" ] || [ -z "$NEW_NAME" ]; then
   echo "❌ 用法: ./init_project.sh com.yourcompany.mynewapp MyNewApp"
   exit 1
-fi
-
-# 自动检测 sed 版本，兼容 macOS / Linux
-if sed --version >/dev/null 2>&1; then
-  # Linux
-  SED_CMD="sed -i"
-else
-  # macOS
-  SED_CMD="sed -i ''"
 fi
 
 # 当前目录名
@@ -55,9 +46,9 @@ fi
 echo "🔧 修改 Android + iOS 包名为: $NEW_PACKAGE"
 dart run change_app_package_name:main "$NEW_PACKAGE"
 
-# 修改 pubspec.yaml 项目名
+# 修改 pubspec.yaml 项目名（macOS sed 正确写法）
 echo "🔧 修改 pubspec.yaml 项目名为: $NEW_NAME"
-$SED_CMD "s/^name: .*/name: $NEW_NAME/" pubspec.yaml
+sed -i '' "s/^name: .*/name: $NEW_NAME/" pubspec.yaml
 
 # Flutter 清理并获取依赖
 flutter clean
