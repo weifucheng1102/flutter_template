@@ -1,4 +1,3 @@
-
 # Flutter Template 🚀
 
 这是一个 Flutter 项目模板，预置了常用依赖和项目结构。  
@@ -67,7 +66,7 @@ git push -u origin main
 
 ## 🛠️ 注意事项
 - 确保你已安装 [Flutter SDK](https://flutter.dev/docs/get-started/install)  
-- 确保 `flutter pub run change_app_package_name` 可以正常执行（依赖在 `dev_dependencies` 中）  
+- 确保 `dart run change_app_package_name:main` 可以正常执行（依赖在 `dev_dependencies` 中）  
 - 如果你要自定义更多初始化步骤，可以修改 `init_project.sh`  
 
 ---
