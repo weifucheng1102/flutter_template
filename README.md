@@ -9,7 +9,7 @@
 
 ### 1. 克隆模板仓库
 ```bash
-git clone https://github.com/yourname/flutter_template
+git clone https://github.com/weifucheng1102/flutter_template
 cd flutter_template
 ```
 
