@@ -53,7 +53,6 @@ git push -u origin main
 模板中预置了一些常用依赖（可按需修改 `pubspec.yaml`）：  
 - [dio](https://pub.dev/packages/dio) —— 网络请求  
 - [provider](https://pub.dev/packages/provider) —— 状态管理  
-- [shared_preferences](https://pub.dev/packages/shared_preferences) —— 本地存储  
 - [flutter_screenutil](https://pub.dev/packages/flutter_screenutil) —— 屏幕适配  
 - [logger](https://pub.dev/packages/logger) —— 日志打印  
 

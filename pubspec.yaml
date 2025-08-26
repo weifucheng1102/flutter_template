@@ -10,13 +10,59 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter   
 
-  # 常用依赖
-  dio: ^5.4.0
-  provider: ^6.1.2
-  shared_preferences: ^2.2.2
-  flutter_screenutil: ^5.9.0
-  logger: ^2.3.0
+  #请求
+  dio: ^5.7.0
+  #屏幕适配
+  flutter_screenutil: ^5.9.3
+  # 本地存储
+  get_storage: ^2.1.1
+  # 状态管理
+  get: ^4.6.6
+  # 日志打印
+  logger: ^2.6.1
+  # 应用信息
+  package_info_plus: ^8.1.1
+  # 路径操作
+  path_provider: ^2.1.5
+  # 常用工具
+  common_utils: ^2.1.0
+  # 键盘监听
+  flutter_keyboard_visibility: ^6.0.0
+  #toast
+  flutter_smart_dialog: ^4.9.8+6
+  # 富文本
+  flutter_widget_from_html_core: ^0.15.2
+  # 图片缓存
+  cached_network_image: ^3.4.1
+  # 权限申请
+  permission_handler: ^11.3.1
+  # 设备信息
+  device_info_plus: ^9.0.3
+  #常用多功能组件
+  bruno: ^3.4.3
+  #自适应gridview
+  dynamic_height_grid_view: ^0.0.4
+  #图片选择
+  image_pickers: 2.0.5+2
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
 
   # 常见 UI 组件
   cupertino_icons: ^1.0.8
@@ -29,6 +75,9 @@ dev_dependencies:
 
   # 修改包名工具
   change_app_package_name: ^1.1.0
+
+dependency_overrides: 
+  meta: 1.15.0  
 
 flutter:
   uses-material-design: true
