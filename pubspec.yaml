@@ -46,12 +46,13 @@ dependencies:
   #自适应gridview
   dynamic_height_grid_view: ^0.0.4
   #图片选择
-  image_pickers: 2.0.5+2
+  image_pickers: ^2.0.6
   #toast
   oktoast: ^3.4.0
   #轮播图
   card_swiper: ^3.0.1
-  
+  #刷新
+  easy_refresh: ^3.4.0
 
 
 
