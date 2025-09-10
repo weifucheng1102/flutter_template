@@ -3,7 +3,7 @@
  # @Author: 魏
  # @Date: 2025-08-23
  # @LastEditors: weifucheng1102
- # @LastEditTime: 2025-08-23 10:39:43
+ # @LastEditTime: 2025-09-10 08:54:25
  # @FilePath: /flutter_template/init_project.sh
  # @Description: 初始化项目模板脚本 (支持 Android & iOS 包名/目录修改)
 ### 
@@ -17,7 +17,11 @@ if [ -z "$NEW_PACKAGE" ] || [ -z "$NEW_NAME" ]; then
   echo "❌ 用法: ./init_project.sh com.yourcompany.mynewapp MyNewApp"
   exit 1
 fi
-
+# ⚠️ 校验 iOS Bundle ID 不能包含下划线 (_)
+if [[ "$NEW_PACKAGE" == *"_"* ]]; then
+  echo "❌ 错误: iOS bundle id 不能包含下划线 (_)，请使用点号分隔，例如: com.example.app"
+  exit 1
+fi
 # 当前目录名
 CURRENT_DIR=$(basename "$PWD")
 
