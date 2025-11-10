@@ -2,7 +2,7 @@
  * @Author: 魏
  * @Date: 2025-08-26 15:22:53
  * @LastEditors: weifucheng1102
- * @LastEditTime: 2025-11-10 10:08:33
+ * @LastEditTime: 2025-11-10 10:30:41
  * @FilePath: /flutter_template/lib/app/config/app_config.dart
  * @Description: 全局配置文件
  * 
@@ -26,9 +26,8 @@ class AppConfig {
   static const Color lineColor = Color(0xFFE4E4E4);
 
   ///微信支付配置
-  static const String wechatPayAppid = 'wxd4904bd7dc34a2b8';
-  static const String wechatPayIosUniversalLink =
-      'https://wxzf.sdzcwlkj.cn/iosApp/';
+  static const String wechatPayAppid = 'xxxxxxxxx';
+  static const String wechatPayIosUniversalLink = 'https://wwwwwww.com/iosApp/';
 }
 
 GetStorage getbox = GetStorage();

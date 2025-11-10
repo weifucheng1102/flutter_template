@@ -116,7 +116,7 @@ fluwx:
 #    interrupt_wx_request: true # Defaults to true.
 #    flutter_activity: 'MainActivity' # Defaults to app's launcher
   ios:
-    universal_link: https://wxzf.sdzcwlkj.cn/iosApp/
+    universal_link: https://xxxxx.com/iosApp/
 #    scene_delegate: true # Defaults to false.
 #    no_pay: true # Set to true to disable payment.
 #    ignore_security: true # Set to true to disable security seetings.
@@ -126,4 +126,4 @@ tobias:
   url_scheme: tobiasexample
   ios:
     ignore_security: true
-    universal_link: https://wxzf.sdzcwlkj.cn/iosApp/      
+    universal_link: https://wwww.com/iosApp/      
