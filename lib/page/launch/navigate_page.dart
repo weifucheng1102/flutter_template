@@ -2,7 +2,7 @@
  * @Author: 魏
  * @Date: 2025-08-27 16:44:30
  * @LastEditors: weifucheng1102
- * @LastEditTime: 2025-11-10 09:59:17
+ * @LastEditTime: 2025-11-10 10:39:00
  * @FilePath: /flutter_template/lib/page/launch/navigate_page.dart
  * @Description: 导航页
  * 
@@ -30,7 +30,7 @@ class _NavigatePageState extends State<NavigatePage> {
     return PopScopeWidget(
       child: Scaffold(
         // #TOTO 根据实际情况是否添加NavigationBar
-        
+
         // bottomNavigationBar: Container(
         //   color: Colors.white,
         //   child: SafeArea(
@@ -69,7 +69,8 @@ class _NavigatePageState extends State<NavigatePage> {
         //   index: _currentIndex,
         //   children: getPage(),
         // ),
-        body: getPage()[_currentIndex],
+        // body: getPage()[_currentIndex],
+        body: Container(),
       ),
     );
   }
