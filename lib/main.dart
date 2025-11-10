@@ -2,7 +2,7 @@
  * @Author: 魏
  * @Date: 2025-08-26 15:51:12
  * @LastEditors: weifucheng1102
- * @LastEditTime: 2025-10-16 09:16:49
+ * @LastEditTime: 2025-11-10 09:14:03
  * @FilePath: /flutter_template/lib/main.dart
  * @Description: 主入口
  * 
@@ -13,11 +13,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:flutter_template/app/config/brn_theme_config.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:oktoast/oktoast.dart';
 
+import 'app/config/brn_theme_config.dart';
 import 'modules/my_home_page.dart';
 
 void main() async {

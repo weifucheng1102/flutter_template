@@ -1,12 +1,11 @@
-
-
 import 'package:dio/dio.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:flutter_template/app/utils/logger.dart';
 import 'package:oktoast/oktoast.dart';
 import 'dart:async';
 import '../config/app_config.dart';
 import 'package:get/get.dart' as getutil;
+
+import 'logger.dart';
 
 class ServiceRequest {
   static Future get(

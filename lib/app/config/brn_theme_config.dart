@@ -2,7 +2,7 @@
  * @Author: 魏
  * @Date: 2025-09-13 10:59:17
  * @LastEditors: weifucheng1102
- * @LastEditTime: 2025-10-16 09:02:10
+ * @LastEditTime: 2025-11-10 09:12:58
  * @FilePath: /flutter_template/lib/app/config/brn_theme_config.dart
  * @Description: 全局配置bruno 主题
  * 
@@ -10,7 +10,8 @@
  */
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/app/config/app_config.dart';
+
+import 'app_config.dart';
 
 class BrnConfigUtils {
   static BrnAllThemeConfig defaultAllConfig = BrnAllThemeConfig(
