@@ -2,7 +2,7 @@
  * @Author: 魏
  * @Date: 2025-08-26 15:51:12
  * @LastEditors: weifucheng1102
- * @LastEditTime: 2025-11-10 09:14:03
+ * @LastEditTime: 2025-11-10 09:49:47
  * @FilePath: /flutter_template/lib/main.dart
  * @Description: 主入口
  * 
@@ -17,8 +17,11 @@ import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:oktoast/oktoast.dart';
 
+import 'app/config/app_config.dart';
 import 'app/config/brn_theme_config.dart';
-import 'modules/my_home_page.dart';
+import 'page/launch/agreement_notice.dart';
+import 'page/launch/launch_page.dart';
+import 'page/launch/navigate_page.dart';
 
 void main() async {
   //brn 配置
@@ -39,14 +42,15 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return OKToast(
           child: GetMaterialApp(
+            title: '',
+
             ///右上角debug角标
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               //页面背景色
-              scaffoldBackgroundColor: Colors.white,
+              scaffoldBackgroundColor: AppConfig.backgroundColor,
               tabBarTheme: const TabBarTheme(dividerHeight: 0.0),
               appBarTheme: const AppBarTheme(scrolledUnderElevation: 0.0),
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
             builder: FlutterSmartDialog.init(
@@ -59,7 +63,7 @@ class MyApp extends StatelessWidget {
                 );
               },
             ),
-            home: const MyHomePage(title: 'Flutter Demo Home Page'),
+            home: isFirst ? const AgreementNotice() : const LaunchPage(),
           ),
         );
       },
