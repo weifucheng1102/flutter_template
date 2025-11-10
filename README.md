@@ -53,9 +53,29 @@ git push -u origin main
 ## 📦 预置依赖
 模板中预置了一些常用依赖（可按需修改 `pubspec.yaml`）：  
 - [dio](https://pub.dev/packages/dio) —— 网络请求  
-- [provider](https://pub.dev/packages/provider) —— 状态管理  
 - [flutter_screenutil](https://pub.dev/packages/flutter_screenutil) —— 屏幕适配  
+- [get_storage](https://pub.dev/packages/get_storage) —— 本地存储  
+- [get](https://pub.dev/packages/get) —— 状态管理  
 - [logger](https://pub.dev/packages/logger) —— 日志打印  
+- [package_info_plus](https://pub.dev/packages/package_info_plus) —— 应用信息  
+- [path_provider](https://pub.dev/packages/path_provider) —— 路径操作
+- [common_utils](https://pub.dev/packages/common_utils) —— 常用工具
+- [flutter_keyboard_visibility](https://pub.dev/packages/flutter_keyboard_visibility) —— 键盘监听
+- [flutter_smart_dialog](https://pub.dev/packages/flutter_smart_dialog) —— 弹窗管理
+- [flutter_widget_from_html_core](https://pub.dev/packages/flutter_widget_from_html_core) —— 富文本解析
+- [cached_network_image](https://pub.dev/packages/cached_network_image) —— 图片缓存
+- [permission_handler](https://pub.dev/packages/permission_handler) —— 权限申请
+- [device_info_plus](https://pub.dev/packages/device_info_plus) —— 设备信息
+- [bruno](https://github.com/LianjiaTech/bruno.git) —— 常用组件
+- [dynamic_height_grid_view](https://pub.dev/packages/dynamic_height_grid_view) —— 自适应gridview
+- [image_pickers]( https://github.com/weifucheng1102/image_pickers.git) —— 图片选择
+- [oktoast](https://pub.dev/packages/oktoast) —— toast 弹窗
+- [card_swiper](https://pub.dev/packages/card_swiper) —— 轮播图
+- [easy_refresh](https://pub.dev/packages/easy_refresh) —— 刷新
+- [url_launcher](https://pub.dev/packages/url_launcher) —— 打开链接
+- [dismissible_page](https://pub.dev/packages/dismissible_page) —— 消除页面
+- [fluwx](https://pub.dev/packages/fluwx) —— 微信支付
+- [tobias](https://pub.dev/packages/tobias) —— 支付宝支付
 
 ---
 
