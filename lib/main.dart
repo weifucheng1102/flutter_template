@@ -2,7 +2,7 @@
  * @Author: 魏
  * @Date: 2025-08-26 15:51:12
  * @LastEditors: weifucheng1102
- * @LastEditTime: 2025-11-10 09:49:47
+ * @LastEditTime: 2025-12-10 09:45:45
  * @FilePath: /flutter_template/lib/main.dart
  * @Description: 主入口
  * 
@@ -11,6 +11,7 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/route_manager.dart';
@@ -21,7 +22,6 @@ import 'app/config/app_config.dart';
 import 'app/config/brn_theme_config.dart';
 import 'page/launch/agreement_notice.dart';
 import 'page/launch/launch_page.dart';
-import 'page/launch/navigate_page.dart';
 
 void main() async {
   //brn 配置
@@ -53,6 +53,19 @@ class MyApp extends StatelessWidget {
               appBarTheme: const AppBarTheme(scrolledUnderElevation: 0.0),
               useMaterial3: true,
             ),
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              BrnLocalizationDelegate.delegate,
+            ],
+            //默认语言
+            locale: const Locale('zh'),
+            //支持的语言，后期根据需要添加
+            supportedLocales: const [
+              Locale('en', 'US'),
+              Locale('zh', 'CN'),
+            ],
             builder: FlutterSmartDialog.init(
               builder: (context, child) {
                 return MediaQuery(
