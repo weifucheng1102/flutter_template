@@ -11,9 +11,9 @@
 import 'dart:io';
 
 import 'package:bruno/bruno.dart';
-import 'package:express_box/app/config/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_template/app/config/app_config.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
 
@@ -50,7 +50,7 @@ class _ScanViewState extends State<ScanView> {
         child: QRView(
           key: qrKey,
           overlay: QrScannerOverlayShape(
-            borderColor: Constants.primaryColor,
+            borderColor: AppConfig.mainColor,
             borderRadius: 16.w,
             borderLength: 30.w,
             borderWidth: 10.w,
