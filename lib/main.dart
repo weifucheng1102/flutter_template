@@ -52,6 +52,8 @@ class MyApp extends StatelessWidget {
               tabBarTheme: const TabBarTheme(dividerHeight: 0.0),
               appBarTheme: const AppBarTheme(scrolledUnderElevation: 0.0),
               useMaterial3: true,
+              //pingfang字体默认
+              fontFamily: 'PingFang',
             ),
             localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,

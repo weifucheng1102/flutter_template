@@ -2,7 +2,7 @@
  * @Author: 魏
  * @Date: 2025-08-27 17:10:23
  * @LastEditors: weifucheng1102
- * @LastEditTime: 2025-11-10 10:07:26
+ * @LastEditTime: 2026-01-26 08:41:23
  * @FilePath: /flutter_template/lib/app/common/common.dart
  * @Description: 
  * 
@@ -68,12 +68,14 @@ showSuccessDialog(String msg, VoidCallback callback) {
   );
 }
 
+
 Future<bool> requestPermission(Permission permission, String descText) async {
   //判断是否是审核中
   bool isChecking = getbox.read('isChecking') ?? false;
 
   var status = await permission.status;
   print('获取权限状态$permission');
+  print(status);
   if (status == PermissionStatus.granted) {
     print('权限已通过');
 
@@ -84,7 +86,8 @@ Future<bool> requestPermission(Permission permission, String descText) async {
 
     ///永久拒绝
     return false;
-  } else if (status == PermissionStatus.denied) {
+  } else if (status == PermissionStatus.denied ||
+      status == PermissionStatus.limited) {
     ///安卓并且审核中  上架要求 判断申请一次 就拒绝了 之后就不再弹出
     if (isChecking && Platform.isAndroid) {
       List permissionList = getbox.read('permissionlist') ?? [];
@@ -111,6 +114,7 @@ Future<bool> requestPermission(Permission permission, String descText) async {
       status = await permission.request();
       getbox.write('permissionlist', [...permissionList, permission.value]);
       print('请求权限');
+      print(status);
       if (status == PermissionStatus.granted) {
         print('权限通过');
         return true;
@@ -121,6 +125,7 @@ Future<bool> requestPermission(Permission permission, String descText) async {
     } else {
       status = await permission.request();
       print('请求权限');
+      print(status);
       if (status == PermissionStatus.granted) {
         print('权限通过');
         return true;
