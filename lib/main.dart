@@ -2,7 +2,7 @@
  * @Author: 魏
  * @Date: 2025-08-26 15:51:12
  * @LastEditors: weifucheng1102
- * @LastEditTime: 2025-12-10 09:45:45
+ * @LastEditTime: 2026-02-04 14:53:30
  * @FilePath: /flutter_template/lib/main.dart
  * @Description: 主入口
  * 
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               //页面背景色
               scaffoldBackgroundColor: AppConfig.backgroundColor,
-              tabBarTheme: const TabBarTheme(dividerHeight: 0.0),
+              tabBarTheme: const TabBarThemeData(dividerHeight: 0.0),
               appBarTheme: const AppBarTheme(scrolledUnderElevation: 0.0),
               useMaterial3: true,
               //pingfang字体默认

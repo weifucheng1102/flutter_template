@@ -19,10 +19,7 @@ class EmptyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BrnAbnormalStateWidget(
-      img: Image.asset(
-        'images/empty.png',
-        width: 500.w,
-      ),
+      img: Image.asset('images/empty.png', width: 500.w),
       bgColor: Colors.transparent,
       content: content ?? '暂无数据',
     );

@@ -5,7 +5,7 @@ publish_to: "none" # 防止意外发布到 pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.3.0 <4.0.0"
+  sdk: ^3.10.8
 
 dependencies:
   flutter:
@@ -14,17 +14,17 @@ dependencies:
     sdk: flutter   
 
   #请求
-  dio: ^5.7.0
+  dio: ^5.9.1
   #屏幕适配
   flutter_screenutil: ^5.9.3
   # 本地存储
   get_storage: ^2.1.1
   # 状态管理
-  get: ^4.6.6
+  get: ^4.7.3
   # 日志打印
-  logger: ^2.6.1
+  logger: ^2.6.2
   # 应用信息
-  package_info_plus: ^8.1.1
+  package_info_plus: ^9.0.0
   # 路径操作
   path_provider: ^2.1.5
   # 常用工具
@@ -32,15 +32,15 @@ dependencies:
   # 键盘监听
   flutter_keyboard_visibility: ^6.0.0
   #toast(只用loading 不用toast,不好用)
-  flutter_smart_dialog: ^4.9.8+6
+  flutter_smart_dialog: ^4.9.8+9
   # 富文本
-  flutter_widget_from_html_core: ^0.15.2
+  flutter_widget_from_html_core: ^0.17.0
   # 图片缓存
   cached_network_image: ^3.4.1
   # 权限申请
-  permission_handler: ^11.3.1
+  permission_handler: ^12.0.1
   # 设备信息
-  device_info_plus: ^9.0.3
+  device_info_plus: ^12.3.0
   #常用多功能组件
   # bruno: ^3.4.3 (这个 全局配置有参数修改不生效，用下面git的)
   bruno: 
@@ -60,17 +60,17 @@ dependencies:
   #刷新
   easy_refresh: ^3.4.0
   # 打开链接
-  url_launcher: ^6.3.1
+  url_launcher: ^6.3.2
   # 解析html
   html: ^0.15.6
   # 二维码扫描
-  qr_code_scanner_plus: ^2.0.10+1
+  qr_code_scanner_plus: ^2.1.1
   # 消除页面
   dismissible_page: ^1.0.2
   # 微信支付
-  fluwx: ^5.7.2
+  fluwx: ^5.7.5
   # 支付宝支付
-  tobias: ^5.2.0
+  tobias: ^5.3.4
 
 
 
@@ -91,13 +91,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^3.0.1
+  flutter_lints: ^6.0.0
 
   # 修改包名工具
   change_app_package_name: ^1.1.0
 
 dependency_overrides: 
-  meta: 1.15.0
+  # meta: 1.15.0
   intl: ^0.18.0  
 
 flutter:
