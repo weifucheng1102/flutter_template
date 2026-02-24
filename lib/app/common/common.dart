@@ -2,7 +2,7 @@
  * @Author: 魏
  * @Date: 2025-08-27 17:10:23
  * @LastEditors: weifucheng1102
- * @LastEditTime: 2026-01-26 08:41:23
+ * @LastEditTime: 2026-02-24 14:02:18
  * @FilePath: /flutter_template/lib/app/common/common.dart
  * @Description: 
  * 
@@ -17,6 +17,7 @@ import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:flutter_template/app/config/app_config.dart';
 import 'package:get/get.dart';
 
 import 'package:permission_handler/permission_handler.dart';
@@ -24,7 +25,7 @@ import 'package:dio/dio.dart' as dio;
 
 import '../../widget/custom_button.dart';
 import '../../widget/custom_dialog.dart';
-import '../config/app_config.dart';
+import '../config/app_theme.dart';
 
 ///操作 成功弹窗
 showSuccessDialog(String msg, VoidCallback callback) {
@@ -210,6 +211,10 @@ showSubmitDialog({
   bool barrierDismissible = true,
   bool autoFocus = true,
 }) {
+  final themeContext = Get.context;
+  final colors = themeContext == null
+      ? AppTheme.lightColors
+      : Theme.of(themeContext).extension<AppColorScheme>()!;
   List textFieldViewList = [];
   if (textfieldList != null) {
     //如果占位符数组小于 输入框数组，则不足的用默认补齐
@@ -228,7 +233,7 @@ showSubmitDialog({
           height: 80.w,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(40.w),
-            color: AppConfig.backgroundColor,
+            color: colors.backgroundColor,
           ),
           alignment: Alignment.center,
           padding: EdgeInsets.symmetric(horizontal: 36.w),

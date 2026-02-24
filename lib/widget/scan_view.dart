@@ -2,7 +2,7 @@
  * @Author: 魏
  * @Date: 2025-02-08 14:54:34
  * @LastEditors: weifucheng1102
- * @LastEditTime: 2026-01-09 16:17:00
+ * @LastEditTime: 2026-02-24 13:46:04
  * @FilePath: /flutter_template/lib/widget/scan_view.dart
  * @Description: 扫二维码
  *
@@ -13,9 +13,10 @@ import 'dart:io';
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_template/app/config/app_config.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
+
+import '../app/config/app_theme.dart';
 
 class ScanView extends StatefulWidget {
   const ScanView({super.key});
@@ -42,15 +43,14 @@ class _ScanViewState extends State<ScanView> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).extension<AppColorScheme>()!;
     return Scaffold(
-      appBar: BrnAppBar(
-        title: '扫一扫'.tr,
-      ),
+      appBar: BrnAppBar(title: '扫一扫'.tr),
       body: SafeArea(
         child: QRView(
           key: qrKey,
           overlay: QrScannerOverlayShape(
-            borderColor: AppConfig.mainColor,
+            borderColor: colors.mainColor,
             borderRadius: 16.w,
             borderLength: 30.w,
             borderWidth: 10.w,

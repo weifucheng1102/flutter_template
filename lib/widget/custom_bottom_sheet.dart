@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
 
-import '../app/config/app_config.dart';
+import '../app/config/app_theme.dart';
 
 typedef MultClickCallback = void Function(
     List selectIndexs, List selectStrings);
@@ -23,6 +23,7 @@ class CustomButtomSheet {
     showModalBottomSheet(
         context: context,
         builder: (context) {
+          final colors = Theme.of(context).extension<AppColorScheme>()!;
           return BrnCommonActionSheet(
             title: title,
             actions: List.generate(
@@ -33,7 +34,7 @@ class CustomButtomSheet {
                   fontWeight: FontWeight.bold,
                   fontSize: 28.sp,
                   color: (selectIndex ?? -1) == index
-                      ? AppConfig.mainColor
+                      ? colors.mainColor
                       : Colors.black,
                 ),
               ),
@@ -58,6 +59,7 @@ class CustomButtomSheet {
       isScrollControlled: true,
       builder: (BuildContext context) {
         return StatefulBuilder(builder: (context1, setState) {
+          final colors = Theme.of(context1).extension<AppColorScheme>()!;
           return Container(
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
@@ -83,7 +85,7 @@ class CustomButtomSheet {
                             '取消',
                             style: TextStyle(
                               fontSize: 28.sp,
-                              color: AppConfig.textMainColor,
+                              color: colors.textMainColor,
                             ),
                           )),
                     ],
@@ -109,7 +111,7 @@ class CustomButtomSheet {
                       '完成',
                       style: TextStyle(
                         fontSize: 28.sp,
-                        color: AppConfig.mainColor,
+                        color: colors.mainColor,
                       ),
                     )),
                   ),
@@ -123,7 +125,7 @@ class CustomButtomSheet {
                           selected.contains(index)
                               ? Icons.check_box
                               : Icons.check_box_outline_blank,
-                          color: AppConfig.mainColor,
+                          color: colors.mainColor,
                         ),
                         title: Text(
                           options[index],

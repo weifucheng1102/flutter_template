@@ -11,26 +11,32 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 
-import 'app_config.dart';
+import 'app_theme.dart';
 
 class BrnConfigUtils {
-  static BrnAllThemeConfig defaultAllConfig = BrnAllThemeConfig(
-    commonConfig: defaultCommonConfig,
-    appBarConfig: BrnAppBarConfig(
-      leadIconBuilder: () {
-        return BrnBackLeading(
-          child: const Icon(
-            Icons.arrow_back_ios,
-          ),
-        );
-      },
-      titleStyle: BrnTextStyle(
-        color: Colors.black,
-        fontWeight: FontWeight.normal,
-      ),
-    ),
-  );
+  static BrnAllThemeConfig get defaultAllConfig =>
+      buildAllConfig(AppTheme.lightColors.mainColor);
 
-  static BrnCommonConfig defaultCommonConfig =
-      BrnCommonConfig(brandPrimary: AppConfig.mainColor);
+  static BrnAllThemeConfig buildAllConfig(Color brandColor) {
+    return BrnAllThemeConfig(
+      commonConfig: _buildCommonConfig(brandColor),
+      appBarConfig: BrnAppBarConfig(
+        leadIconBuilder: () {
+          return BrnBackLeading(
+            child: const Icon(
+              Icons.arrow_back_ios,
+            ),
+          );
+        },
+        titleStyle: BrnTextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.normal,
+        ),
+      ),
+    );
+  }
+
+  static BrnCommonConfig _buildCommonConfig(Color brandColor) {
+    return BrnCommonConfig(brandPrimary: brandColor);
+  }
 }

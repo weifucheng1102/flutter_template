@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
 
+import '../../app/config/app_theme.dart';
 import '../../app/config/app_config.dart';
 import '../../widget/custom_rich_text.dart';
 import 'launch_page.dart';
@@ -31,6 +32,7 @@ class _AgreementNoticeState extends State<AgreementNotice> {
   }
 
   Widget dialogContainer() {
+    final colors = Theme.of(context).extension<AppColorScheme>()!;
     return Container(
       width: 620.w,
       padding: EdgeInsets.symmetric(horizontal: 48.w, vertical: 64.w),
@@ -57,12 +59,12 @@ class _AgreementNoticeState extends State<AgreementNotice> {
                     .tr,
             highlights: {
               '《用户协议》'.tr: TextStyle(
-                color: AppConfig.mainColor,
+                color: colors.mainColor,
                 fontSize: 28.sp,
                 height: 2,
               ),
               '《隐私政策》'.tr: TextStyle(
-                color: AppConfig.mainColor,
+                color: colors.mainColor,
                 fontSize: 28.sp,
                 height: 2,
               ),
@@ -79,7 +81,7 @@ class _AgreementNoticeState extends State<AgreementNotice> {
               },
             },
             defaultStyle: TextStyle(
-              color: AppConfig.textMainColor,
+              color: colors.textMainColor,
               fontSize: 28.sp,
               height: 2,
             ),

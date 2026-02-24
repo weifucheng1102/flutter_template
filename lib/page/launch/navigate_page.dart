@@ -12,8 +12,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../app/config/app_config.dart';
+import '../../app/config/app_theme.dart';
 import '../../app/utils/logger.dart';
+import '../demo/theme_color_demo_page.dart';
 import '../../widget/pop_scope_widget.dart';
 
 class NavigatePage extends StatefulWidget {
@@ -43,18 +44,21 @@ class _NavigatePageState extends State<NavigatePage> {
         //         mainAxisAlignment: MainAxisAlignment.spaceAround,
         //         children: [
         //           _buildTabItem(
+        //             context: context,
         //             index: 0,
         //             icon: 'images/tab0-.png',
         //             selIcon: 'images/tab0.png',
         //             label: '首页',
         //           ),
         //           _buildTabItem(
+        //             context: context,
         //             index: 1,
         //             icon: 'images/tab1-.png',
         //             selIcon: 'images/tab1.png',
         //             label: '我的派件',
         //           ),
         //           _buildTabItem(
+        //             context: context,
         //             index: 2,
         //             icon: 'images/tab2-.png',
         //             selIcon: 'images/tab2.png',
@@ -70,7 +74,7 @@ class _NavigatePageState extends State<NavigatePage> {
         //   children: getPage(),
         // ),
         // body: getPage()[_currentIndex],
-        body: Container(),
+        body: const ThemeColorDemoPage(),
       ),
     );
   }
@@ -109,13 +113,15 @@ class _NavigatePageState extends State<NavigatePage> {
   }
 
   Widget _buildTabItem({
+    required BuildContext context,
     required int index,
     required String icon,
     required String selIcon,
     required String label,
   }) {
+    final colors = Theme.of(context).extension<AppColorScheme>()!;
     final isSelected = _currentIndex == index;
-    final color = isSelected ? AppConfig.mainColor : AppConfig.textMainColor;
+    final color = isSelected ? colors.mainColor : colors.textMainColor;
     return Expanded(
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,

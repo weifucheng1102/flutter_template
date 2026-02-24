@@ -14,20 +14,25 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:oktoast/oktoast.dart';
 
 import 'app/config/app_config.dart';
 import 'app/config/brn_theme_config.dart';
+import 'app/controller/theme_controller.dart';
 import 'page/launch/agreement_notice.dart';
 import 'page/launch/launch_page.dart';
 
 void main() async {
   //brn 配置
-  BrnInitializer.register(allThemeConfig: BrnConfigUtils.defaultAllConfig);
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  Get.put(ThemeController());
+  BrnInitializer.register(
+    allThemeConfig:
+        BrnConfigUtils.buildAllConfig(ThemeController.to.colors.mainColor),
+  );
   runApp(const MyApp());
 }
 
@@ -40,46 +45,44 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(750, 1440),
       builder: (context, child) {
-        return OKToast(
-          child: GetMaterialApp(
-            title: '',
+        return GetBuilder<ThemeController>(
+          builder: (themeController) {
+            return OKToast(
+              child: GetMaterialApp(
+                title: '',
 
-            ///右上角debug角标
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              //页面背景色
-              scaffoldBackgroundColor: AppConfig.backgroundColor,
-              tabBarTheme: const TabBarThemeData(dividerHeight: 0.0),
-              appBarTheme: const AppBarTheme(scrolledUnderElevation: 0.0),
-              useMaterial3: true,
-              //pingfang字体默认
-              fontFamily: 'PingFang',
-            ),
-            localizationsDelegates: [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              BrnLocalizationDelegate.delegate,
-            ],
-            //默认语言
-            locale: const Locale('zh'),
-            //支持的语言，后期根据需要添加
-            supportedLocales: const [
-              Locale('en', 'US'),
-              Locale('zh', 'CN'),
-            ],
-            builder: FlutterSmartDialog.init(
-              builder: (context, child) {
-                return MediaQuery(
-                  data: MediaQuery.of(context).copyWith(
-                    textScaler: TextScaler.noScaling,
-                  ),
-                  child: KeyboardDismissOnTap(child: child!),
-                );
-              },
-            ),
-            home: isFirst ? const AgreementNotice() : const LaunchPage(),
-          ),
+                ///右上角debug角标
+                debugShowCheckedModeBanner: false,
+                theme: themeController.lightTheme,
+                darkTheme: themeController.darkTheme,
+                themeMode: themeController.themeMode,
+                localizationsDelegates: [
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                  BrnLocalizationDelegate.delegate,
+                ],
+                //默认语言
+                locale: const Locale('zh'),
+                //支持的语言，后期根据需要添加
+                supportedLocales: const [
+                  Locale('en', 'US'),
+                  Locale('zh', 'CN'),
+                ],
+                builder: FlutterSmartDialog.init(
+                  builder: (context, child) {
+                    return MediaQuery(
+                      data: MediaQuery.of(context).copyWith(
+                        textScaler: TextScaler.noScaling,
+                      ),
+                      child: KeyboardDismissOnTap(child: child!),
+                    );
+                  },
+                ),
+                home: isFirst ? const AgreementNotice() : const LaunchPage(),
+              ),
+            );
+          },
         );
       },
     );

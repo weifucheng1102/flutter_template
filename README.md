@@ -79,6 +79,34 @@ git push -u origin main
 
 ---
 
+## 🎨 主题色使用
+模板已内置主题色配置，统一由 `AppColorScheme` 管理。
+
+### 1. 修改默认主题色
+在 `lib/app/config/app_theme.dart` 中调整 `mainColor`：  
+- 浅色：`AppTheme.lightColors.mainColor`  
+- 深色：`AppTheme.darkColors.mainColor`  
+
+### 2. 在组件中使用主题色
+```dart
+final colors = Theme.of(context).extension<AppColorScheme>()!;
+final primary = colors.mainColor;
+```
+
+### 3. 切换浅色/深色主题
+运行时调用：  
+```dart
+ThemeController.to.setThemeMode(ThemeMode.light); // 浅色
+ThemeController.to.setThemeMode(ThemeMode.dark);  // 深色
+ThemeController.to.setThemeMode(ThemeMode.system); // 跟随系统
+```
+或使用快捷切换：  
+```dart
+ThemeController.to.toggleThemeMode();
+```
+
+---
+
 ## 🛠️ 注意事项
 - 确保你已安装 [Flutter SDK](https://flutter.dev/docs/get-started/install)  
 - 确保 `dart run change_app_package_name:main` 可以正常执行（依赖在 `dev_dependencies` 中）  

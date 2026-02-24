@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../app/config/app_config.dart';
+import '../app/config/app_theme.dart';
 
 class CustomLabel extends StatelessWidget {
   final Widget? image;
@@ -79,6 +79,7 @@ class CustomLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).extension<AppColorScheme>()!;
     return InkWell(
       onTap: callback,
       child: SizedBox(
@@ -89,7 +90,7 @@ class CustomLabel extends StatelessWidget {
               child: Row(
                 children: [
                   bottomLabel != null
-                      ? bottomLabelWidget()
+                      ? bottomLabelWidget(colors)
                       : Row(
                           children: [
                             if (image != null)
@@ -97,20 +98,17 @@ class CustomLabel extends StatelessWidget {
                                 padding: EdgeInsets.only(right: 22.w),
                                 child: image,
                               ),
-                            labelWidget(),
+                            labelWidget(colors),
                             Text(
                               desc ?? '',
                               style: TextStyle(
                                 fontSize: 26.sp,
-                                color: AppConfig.textSubColor,
+                                color: colors.textSubColor,
                               ),
                             ),
                           ],
                         ),
-                  if (bottomLabel != null)
-                    SizedBox(
-                      width: 10.w,
-                    ),
+                  if (bottomLabel != null) SizedBox(width: 10.w),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -127,50 +125,55 @@ class CustomLabel extends StatelessWidget {
                                       textAlign: TextAlign.end,
                                       style: input.isEmpty && tip != null
                                           ? (tipStyle ??
-                                              TextStyle(
-                                                fontSize: 28.sp,
-                                                color: AppConfig.textSubColor,
-                                              ))
+                                                TextStyle(
+                                                  fontSize: 28.sp,
+                                                  color: colors.textSubColor,
+                                                ))
                                           : (inputStyle ??
-                                              TextStyle(
-                                                fontSize: 28.sp,
-                                                color: AppConfig.textMainColor,
-                                              )),
+                                                TextStyle(
+                                                  fontSize: 28.sp,
+                                                  color: colors.textMainColor,
+                                                )),
                                     ),
                                   )
                                 : Expanded(
                                     child: TextField(
-                                    style: textfieldStyle ??
-                                        TextStyle(
-                                          fontSize: 28.sp,
-                                          color: AppConfig.textMainColor,
-                                        ),
-                                    focusNode: focusNode,
-                                    maxLength: textfieldMaxLength,
-                                    readOnly: textfieldReadOnly,
-                                    decoration: InputDecoration(
-                                      isCollapsed: true,
-                                      counterText: '',
-                                      border: InputBorder.none,
-                                      hintText: tip ?? '',
-                                      hintStyle: tipStyle ??
+                                      style:
+                                          textfieldStyle ??
                                           TextStyle(
                                             fontSize: 28.sp,
-                                            color: AppConfig.textSubColor,
+                                            color: colors.textMainColor,
                                           ),
+                                      focusNode: focusNode,
+                                      maxLength: textfieldMaxLength,
+                                      readOnly: textfieldReadOnly,
+                                      decoration: InputDecoration(
+                                        isCollapsed: true,
+                                        counterText: '',
+                                        border: InputBorder.none,
+                                        hintText: tip ?? '',
+                                        hintStyle:
+                                            tipStyle ??
+                                            TextStyle(
+                                              fontSize: 28.sp,
+                                              color: colors.textSubColor,
+                                            ),
+                                      ),
+                                      inputFormatters: inputFormatters,
+                                      textAlign:
+                                          textfieldAlign ?? TextAlign.end,
+                                      controller: textCon,
+                                      obscureText: isObscure!,
+                                      keyboardType: keyboardType,
+                                      onChanged: onChanged,
                                     ),
-                                    inputFormatters: inputFormatters,
-                                    textAlign: textfieldAlign ?? TextAlign.end,
-                                    controller: textCon,
-                                    obscureText: isObscure!,
-                                    keyboardType: keyboardType,
-                                    onChanged: onChanged,
-                                  ))),
+                                  )),
                         Visibility(
                           visible: hasRight,
                           child: Padding(
                             padding: EdgeInsets.only(left: 20.w),
-                            child: rightImagePicture ??
+                            child:
+                                rightImagePicture ??
                                 Image.asset(
                                   'images/right.png',
                                   width: 36.w,
@@ -180,16 +183,13 @@ class CustomLabel extends StatelessWidget {
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
             Visibility(
               visible: hasBottomLine,
-              child: Container(
-                height: 1.w,
-                color: AppConfig.lineColor,
-              ),
+              child: Container(height: 1.w, color: colors.lineColor),
             ),
           ],
         ),
@@ -197,7 +197,7 @@ class CustomLabel extends StatelessWidget {
     );
   }
 
-  Widget bottomLabelWidget() {
+  Widget bottomLabelWidget(AppColorScheme colors) {
     return Row(
       children: [
         if (image != null)
@@ -209,17 +209,13 @@ class CustomLabel extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            labelWidget(),
-            SizedBox(
-              height: 8.w,
-            ),
+            labelWidget(colors),
+            SizedBox(height: 8.w),
             Text(
               bottomLabel!,
-              style: bottomLabelStyle ??
-                  TextStyle(
-                    fontSize: 22.sp,
-                    color: const Color(0xffafafaf),
-                  ),
+              style:
+                  bottomLabelStyle ??
+                  TextStyle(fontSize: 22.sp, color: const Color(0xffafafaf)),
             ),
           ],
         ),
@@ -227,27 +223,27 @@ class CustomLabel extends StatelessWidget {
     );
   }
 
-  Widget labelWidget() {
+  Widget labelWidget(AppColorScheme colors) {
     return Text.rich(
-      TextSpan(children: [
-        if (required)
-          TextSpan(
-            text: '*',
-            style: TextStyle(
-              fontSize: 28.sp,
-              color: Color(0xfff53d3d),
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        TextSpan(
-          text: label,
-          style: labelStyle ??
-              TextStyle(
+      TextSpan(
+        children: [
+          if (required)
+            TextSpan(
+              text: '*',
+              style: TextStyle(
                 fontSize: 28.sp,
-                color: AppConfig.textMainColor,
+                color: Color(0xfff53d3d),
+                fontWeight: FontWeight.bold,
               ),
-        ),
-      ]),
+            ),
+          TextSpan(
+            text: label,
+            style:
+                labelStyle ??
+                TextStyle(fontSize: 28.sp, color: colors.textMainColor),
+          ),
+        ],
+      ),
     );
   }
 }

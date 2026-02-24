@@ -11,13 +11,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../app/config/app_config.dart';
+import '../app/config/app_theme.dart';
 
 class CustomButton extends StatelessWidget {
   final double? height;
   final double? width;
   final dynamic title;
-  final Color bgColor;
+  final Color? bgColor;
   final Color borderColor;
   final Color textColor;
   final FontWeight fontWeight;
@@ -31,7 +31,7 @@ class CustomButton extends StatelessWidget {
     this.width,
     this.title = '确定',
     this.onTap,
-    this.bgColor = AppConfig.mainColor,
+    this.bgColor,
     this.borderColor = Colors.transparent,
     this.textColor = Colors.white,
     this.fontWeight = FontWeight.w500,
@@ -42,6 +42,7 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).extension<AppColorScheme>()!;
     return InkWell(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
@@ -56,7 +57,7 @@ class CustomButton extends StatelessWidget {
             gradient: gradient,
             borderRadius:
                 BorderRadius.circular(borderRadius ?? ((height ?? 98.w) / 2)),
-            color: bgColor,
+            color: bgColor ?? colors.mainColor,
             border: Border.all(color: borderColor, width: 1.w)),
         alignment: Alignment.center,
         child: title.runtimeType == String
