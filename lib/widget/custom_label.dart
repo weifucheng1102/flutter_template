@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../app/config/app_theme.dart';
+import '../app/common/theme_colors.dart';
 
 class CustomLabel extends StatelessWidget {
   final Widget? image;
@@ -79,7 +80,6 @@ class CustomLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).extension<AppColorScheme>()!;
     return InkWell(
       onTap: callback,
       child: SizedBox(

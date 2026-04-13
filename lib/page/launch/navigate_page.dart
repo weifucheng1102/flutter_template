@@ -12,7 +12,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../app/config/app_theme.dart';
+import '../../app/common/theme_colors.dart';
 import '../../app/utils/logger.dart';
 import '../demo/theme_color_demo_page.dart';
 import '../../widget/pop_scope_widget.dart';
@@ -119,7 +119,6 @@ class _NavigatePageState extends State<NavigatePage> {
     required String selIcon,
     required String label,
   }) {
-    final colors = Theme.of(context).extension<AppColorScheme>()!;
     final isSelected = _currentIndex == index;
     final color = isSelected ? colors.mainColor : colors.textMainColor;
     return Expanded(

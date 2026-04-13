@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../app/config/app_theme.dart';
+import '../../app/common/theme_colors.dart';
 
 class ThemeColorDemoPage extends StatelessWidget {
   const ThemeColorDemoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).extension<AppColorScheme>()!;
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(

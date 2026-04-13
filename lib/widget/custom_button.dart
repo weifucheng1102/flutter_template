@@ -11,7 +11,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../app/config/app_theme.dart';
+import '../app/common/theme_colors.dart';
 
 class CustomButton extends StatelessWidget {
   final double? height;
@@ -42,7 +42,6 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).extension<AppColorScheme>()!;
     return InkWell(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());

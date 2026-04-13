@@ -93,6 +93,13 @@ final colors = Theme.of(context).extension<AppColorScheme>()!;
 final primary = colors.mainColor;
 ```
 
+也可以使用全局 `colors` getter（无需 `BuildContext`）：  
+```dart
+import 'app/common/theme_colors.dart';
+
+final primary = colors.mainColor;
+```
+
 ### 3. 切换浅色/深色主题
 运行时调用：  
 ```dart
@@ -113,7 +120,7 @@ ThemeController.to.toggleThemeMode();
 - 如果你要自定义更多初始化步骤，可以修改 `init_project.sh`  
 - ⚠️ **包名/Bundle ID 不允许包含下划线 `_`**  
   - ✅ 正确: `com.example.myapp`  
-  - ❌ 错误: `com.example_myapp` （iOS 不支持下划线，会导致打包失败）
+  - ❌ 错误: `com.example.my_app` （iOS 不支持下划线，会导致打包失败）
 
 ### 🔑 Android 签名秘钥配置
 为了打包发布 Android 应用，你需要添加自己的签名秘钥：

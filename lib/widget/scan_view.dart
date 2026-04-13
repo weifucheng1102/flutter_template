@@ -16,7 +16,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
 
-import '../app/config/app_theme.dart';
+import '../app/common/theme_colors.dart';
 
 class ScanView extends StatefulWidget {
   const ScanView({super.key});
@@ -43,7 +43,6 @@ class _ScanViewState extends State<ScanView> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).extension<AppColorScheme>()!;
     return Scaffold(
       appBar: BrnAppBar(title: '扫一扫'.tr),
       body: SafeArea(

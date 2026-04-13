@@ -8,8 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
 
-import '../../app/config/app_theme.dart';
 import '../../app/config/app_config.dart';
+import '../../app/common/theme_colors.dart';
 import '../../widget/custom_rich_text.dart';
 import 'launch_page.dart';
 
@@ -32,7 +32,6 @@ class _AgreementNoticeState extends State<AgreementNotice> {
   }
 
   Widget dialogContainer() {
-    final colors = Theme.of(context).extension<AppColorScheme>()!;
     return Container(
       width: 620.w,
       padding: EdgeInsets.symmetric(horizontal: 48.w, vertical: 64.w),
