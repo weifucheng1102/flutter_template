@@ -48,6 +48,7 @@ class CustomLabel extends StatelessWidget {
   ///      ),
   /// ```
   const CustomLabel({
+    super.key,
     required this.label,
     required this.input,
     this.desc,
@@ -75,8 +76,7 @@ class CustomLabel extends StatelessWidget {
     this.rightImagePicture,
     this.required = false,
     this.textfieldReadOnly = false,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

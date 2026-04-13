@@ -67,6 +67,8 @@ dependencies:
   qr_code_scanner_plus: ^2.1.1
   # 消除页面
   dismissible_page: ^1.0.2
+  # 图片预览
+  photo_view: ^0.14.0
   # 微信支付
   fluwx: ^5.7.5
   # 支付宝支付

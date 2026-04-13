@@ -8,9 +8,9 @@
  * 
  * Copyright (c) 2025 by 魏, All Rights Reserved. 
  */
-import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:oktoast/oktoast.dart';
 
 class PopScopeWidget extends StatefulWidget {
@@ -38,7 +38,7 @@ class _PopScopeWidgetState extends State<PopScopeWidget> {
           showToast('再次返回退出');
           Future.delayed(const Duration(seconds: 2), () => _flag = 0);
           if (_flag == 0) {
-            exit(0);
+            SystemNavigator.pop();
           }
         }
       },

@@ -1,36 +1,25 @@
-import 'dart:io';
 import 'package:bruno/bruno.dart';
-import 'package:dio/dio.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:oktoast/oktoast.dart';
 
-import '../../app/config/app_config.dart';
 import '../../app/common/theme_colors.dart';
+import '../../app/core/network/network_warmup_service.dart';
+import '../../app/core/storage/storage_service.dart';
+import '../../app/routes/app_routes.dart';
 import '../../widget/custom_rich_text.dart';
-import 'launch_page.dart';
+import '../legal/legal_document_page.dart';
 
 class AgreementNotice extends StatefulWidget {
-  const AgreementNotice({Key? key}) : super(key: key);
+  const AgreementNotice({super.key});
 
   @override
   State<AgreementNotice> createState() => _AgreementNoticeState();
 }
 
 class _AgreementNoticeState extends State<AgreementNotice> {
-  @override
-  void initState() {
-    if (Platform.isIOS) {
-      try {
-        Dio().get('https://www.baidu.com');
-      } catch (e) {}
-    }
-    super.initState();
-  }
-
   Widget dialogContainer() {
     return Container(
       width: 620.w,
@@ -70,13 +59,22 @@ class _AgreementNoticeState extends State<AgreementNotice> {
             },
             onTapMap: {
               '《用户协议》'.tr: () {
-                // #TODO 跳转用户协议页面
-                //弹窗
-                showToast('跳转用户协议');
+                Get.toNamed(
+                  AppRoutes.legal,
+                  arguments: const LegalDocumentArgs(
+                    title: '用户协议',
+                    content: '这里放用户协议模板内容。建议在新项目中替换为正式协议文案。',
+                  ),
+                );
               },
               '《隐私政策》'.tr: () {
-                // #TODO 跳转隐私政策页面
-                showToast('跳转隐私政策');
+                Get.toNamed(
+                  AppRoutes.legal,
+                  arguments: const LegalDocumentArgs(
+                    title: '隐私政策',
+                    content: '这里放隐私政策模板内容。建议在新项目中替换为正式隐私政策文案。',
+                  ),
+                );
               },
             },
             defaultStyle: TextStyle(
@@ -94,14 +92,18 @@ class _AgreementNoticeState extends State<AgreementNotice> {
               BrnSmallMainButton(
                 title: '暂不适用'.tr,
                 bgColor: const Color(0xff999999),
-                onTap: () => exit(0),
+                onTap: SystemNavigator.pop,
               ),
               BrnSmallMainButton(
                 title: '同意'.tr,
-                onTap: () {
-                  getbox.write('isFirst', false);
-
-                  Get.offAll(const LaunchPage());
+                onTap: () async {
+                  await StorageService.acceptAgreement();
+                  await NetworkWarmupService.ensureReady();
+                  if (StorageService.hasToken) {
+                    Get.offAllNamed(AppRoutes.launch);
+                    return;
+                  }
+                  Get.offAllNamed(AppRoutes.login);
                 },
               )
             ],
@@ -116,7 +118,7 @@ class _AgreementNoticeState extends State<AgreementNotice> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        color: Colors.black.withOpacity(0.6),
+        color: Colors.black.withValues(alpha: 0.6),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

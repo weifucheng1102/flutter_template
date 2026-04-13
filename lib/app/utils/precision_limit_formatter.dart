@@ -10,17 +10,16 @@
  */
 
 import 'package:flutter/services.dart';
-import 'dart:math' as math;
 
 class PrecisionLimitFormatter extends TextInputFormatter {
-  int _scale;
+  final int _scale;
 
   PrecisionLimitFormatter(this._scale);
 
-  RegExp exp = RegExp(r"[0-9]");
-  static const String POINTER = ".";
-  static const String DOUBLE_ZERO = "00";
-  static const String ZERO = "0";
+  final RegExp exp = RegExp(r"[0-9]");
+  static const String pointer = ".";
+  static const String doubleZero = "00";
+  static const String zero = "0";
 
   @override
   TextEditingValue formatEditUpdate(
@@ -51,7 +50,7 @@ class PrecisionLimitFormatter extends TextInputFormatter {
       return oldValue;
     }
 
-    if (newValue.text.startsWith(ZERO) &&
+    if (newValue.text.startsWith(zero) &&
         newValue.text.split("0")[1].startsWith(RegExp(r'[0-9]'))) {
       return const TextEditingValue(
         text: '0',
@@ -64,14 +63,14 @@ class PrecisionLimitFormatter extends TextInputFormatter {
     }
 
     ///包含小数点的情况
-    if (newValue.text.contains(POINTER)) {
+    if (newValue.text.contains(pointer)) {
       ///包含多个小数
-      if (newValue.text.indexOf(POINTER) !=
-          newValue.text.lastIndexOf(POINTER)) {
+      if (newValue.text.indexOf(pointer) !=
+          newValue.text.lastIndexOf(pointer)) {
         return oldValue;
       }
       String input = newValue.text;
-      int index = input.indexOf(POINTER);
+      int index = input.indexOf(pointer);
 
       ///小数点后位数
       int lengthAfterPointer = input.substring(index, input.length).length - 1;
@@ -80,8 +79,8 @@ class PrecisionLimitFormatter extends TextInputFormatter {
       if (lengthAfterPointer > _scale) {
         return oldValue;
       }
-    } else if (newValue.text.startsWith(POINTER) ||
-        newValue.text.startsWith(DOUBLE_ZERO)) {
+    } else if (newValue.text.startsWith(pointer) ||
+        newValue.text.startsWith(doubleZero)) {
       ///不包含小数点,不能以“00”开头
       return oldValue;
     }

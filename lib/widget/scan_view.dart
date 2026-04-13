@@ -80,7 +80,6 @@ class _ScanViewState extends State<ScanView> {
 
   @override
   void dispose() {
-    controller?.dispose();
     super.dispose();
   }
 }

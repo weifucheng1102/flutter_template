@@ -10,10 +10,11 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../app/common/theme_colors.dart';
-import '../../app/utils/logger.dart';
+import '../../app/routes/app_routes.dart';
+import '../home/home_dashboard_page.dart';
+import '../home/settings_page.dart';
 import '../demo/theme_color_demo_page.dart';
 import '../../widget/pop_scope_widget.dart';
 
@@ -26,115 +27,54 @@ class NavigatePage extends StatefulWidget {
 
 class _NavigatePageState extends State<NavigatePage> {
   int _currentIndex = 0;
+
+  // 底部导航默认只放 3 个稳定入口，方便模板项目快速替换成真实模块。
+  static const List<Widget> _pages = <Widget>[
+    HomeDashboardPage(),
+    ThemeColorDemoPage(),
+    SettingsPage(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return PopScopeWidget(
       child: Scaffold(
-        // #TOTO 根据实际情况是否添加NavigationBar
-
-        // bottomNavigationBar: Container(
-        //   color: Colors.white,
-        //   child: SafeArea(
-        //     child: BottomAppBar(
-        //       color: Colors.white,
-        //       height: 100.w,
-        //       padding: EdgeInsets.zero,
-        //       shape: const CircularNotchedRectangle(),
-        //       child: Row(
-        //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //         children: [
-        //           _buildTabItem(
-        //             context: context,
-        //             index: 0,
-        //             icon: 'images/tab0-.png',
-        //             selIcon: 'images/tab0.png',
-        //             label: '首页',
-        //           ),
-        //           _buildTabItem(
-        //             context: context,
-        //             index: 1,
-        //             icon: 'images/tab1-.png',
-        //             selIcon: 'images/tab1.png',
-        //             label: '我的派件',
-        //           ),
-        //           _buildTabItem(
-        //             context: context,
-        //             index: 2,
-        //             icon: 'images/tab2-.png',
-        //             selIcon: 'images/tab2.png',
-        //             label: '我的',
-        //           ),
-        //         ],
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        // body: IndexedStack(
-        //   index: _currentIndex,
-        //   children: getPage(),
-        // ),
-        // body: getPage()[_currentIndex],
-        body: const ThemeColorDemoPage(),
-      ),
-    );
-  }
-
-  void onTabSelected(int index) {
-    Log.i('点击了$index');
-    if (index == _currentIndex) return; // 如果点击的是当前选中的tab，则不做任何操作
-    setState(() {
-      _currentIndex = index;
-    });
-    switch (index) {
-      case 0:
-        break;
-      case 1:
-        break;
-      case 2:
-        break;
-      default:
-        break;
-    }
-  }
-
-  List<Widget> getPage() {
-    // #TODO 这里需要根据实际情况来添加页面
-    return [
-      // HomeIndex(
-      //   onGoToDelivery: () {
-      //     setState(() {
-      //       _currentIndex = 1;
-      //     });
-      //   },
-      // ),
-      // const DeliveryIndex(),
-      // const MineIndex(),
-    ];
-  }
-
-  Widget _buildTabItem({
-    required BuildContext context,
-    required int index,
-    required String icon,
-    required String selIcon,
-    required String label,
-  }) {
-    final isSelected = _currentIndex == index;
-    final color = isSelected ? colors.mainColor : colors.textMainColor;
-    return Expanded(
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () => onTabSelected(index),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(isSelected ? selIcon : icon, width: 42.w),
-            Text(
-              label,
-              style: TextStyle(color: color, fontSize: 22.w),
+        body: IndexedStack(
+          index: _currentIndex,
+          children: _pages,
+        ),
+        bottomNavigationBar: NavigationBar(
+          selectedIndex: _currentIndex,
+          onDestinationSelected: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          destinations: const <NavigationDestination>[
+            NavigationDestination(
+              icon: Icon(Icons.dashboard_outlined),
+              selectedIcon: Icon(Icons.dashboard_rounded),
+              label: '工作台',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.color_lens_outlined),
+              selectedIcon: Icon(Icons.color_lens_rounded),
+              label: '主题',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.settings_outlined),
+              selectedIcon: Icon(Icons.settings_rounded),
+              label: '设置',
             ),
           ],
         ),
+        floatingActionButton: _currentIndex == 0
+            ? FloatingActionButton.extended(
+                onPressed: () => Get.toNamed(AppRoutes.profile),
+                icon: const Icon(Icons.person_outline_rounded),
+                label: const Text('受保护路由'),
+              )
+            : null,
       ),
     );
   }

@@ -8,23 +8,99 @@
  * 
  * Copyright (c) 2025 by 魏, All Rights Reserved. 
  */
-import 'package:get_storage/get_storage.dart';
 
-/// app_config.dart
-/// 全局配置文件
+enum AppEnvironment {
+  dev,
+  test,
+  prod;
 
-class AppConfig {
-  /// api地址
-  static const String baseUrl = '';
-
-  ///微信支付配置
-  static const String wechatPayAppid = 'xxxxxxxxx';
-  static const String wechatPayIosUniversalLink = 'https://wwwwwww.com/iosApp/';
+  static AppEnvironment fromName(String value) {
+    switch (value.toLowerCase()) {
+      case 'prod':
+        return AppEnvironment.prod;
+      case 'test':
+        return AppEnvironment.test;
+      case 'dev':
+      default:
+        return AppEnvironment.dev;
+    }
+  }
 }
 
-GetStorage getbox = GetStorage();
-//第一次打开
-bool get isFirst => getbox.read('isFirst') ?? true;
+class AppEnvConfig {
+  const AppEnvConfig({
+    required this.label,
+    required this.baseUrl,
+    required this.networkWarmupUrl,
+    required this.wechatPayAppid,
+    required this.wechatPayIosUniversalLink,
+  });
 
-/// 登录状态
-bool get isLogin => getbox.read('token') != null;
+  final String label;
+  final String baseUrl;
+  final String networkWarmupUrl;
+  final String wechatPayAppid;
+  final String wechatPayIosUniversalLink;
+}
+
+class AppConfig {
+  static const String _envName =
+      String.fromEnvironment('APP_ENV', defaultValue: 'dev');
+
+  static final AppEnvironment env = AppEnvironment.fromName(_envName);
+
+  static const AppEnvConfig _devConfig = AppEnvConfig(
+    label: '开发',
+    baseUrl: '',
+    networkWarmupUrl: 'https://www.baidu.com',
+    wechatPayAppid: 'xxxxxxxxx',
+    wechatPayIosUniversalLink: 'https://wwwwwww.com/iosApp/',
+  );
+
+  static const AppEnvConfig _testConfig = AppEnvConfig(
+    label: '测试',
+    baseUrl: '',
+    networkWarmupUrl: 'https://www.baidu.com',
+    wechatPayAppid: 'xxxxxxxxx',
+    wechatPayIosUniversalLink: 'https://wwwwwww.com/iosApp/',
+  );
+
+  static const AppEnvConfig _prodConfig = AppEnvConfig(
+    label: '生产',
+    baseUrl: '',
+    networkWarmupUrl: 'https://www.baidu.com',
+    wechatPayAppid: 'xxxxxxxxx',
+    wechatPayIosUniversalLink: 'https://wwwwwww.com/iosApp/',
+  );
+
+  static AppEnvConfig get current {
+    switch (env) {
+      case AppEnvironment.test:
+        return _testConfig;
+      case AppEnvironment.prod:
+        return _prodConfig;
+      case AppEnvironment.dev:
+        return _devConfig;
+    }
+  }
+
+  static String get envName => env.name;
+
+  static bool get isProd => env == AppEnvironment.prod;
+
+  static bool get hasBaseUrl => current.baseUrl.trim().isNotEmpty;
+
+  /// api地址
+  static String get baseUrl => current.baseUrl;
+
+  /// iOS 首次网络访问预热地址。
+  ///
+  /// 模板默认保留百度作为兜底示例，建议尽快替换成你自己的轻量接口。
+  static String get networkWarmupUrl => current.networkWarmupUrl;
+
+  /// 微信支付配置
+  static String get wechatPayAppid => current.wechatPayAppid;
+
+  static String get wechatPayIosUniversalLink =>
+      current.wechatPayIosUniversalLink;
+}

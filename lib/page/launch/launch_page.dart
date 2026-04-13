@@ -14,23 +14,8 @@ import 'package:flutter/material.dart';
 import 'navigate_page.dart';
 import 'page_config.dart';
 
-class LaunchPage extends StatefulWidget {
+class LaunchPage extends StatelessWidget {
   const LaunchPage({super.key});
-
-  @override
-  State<LaunchPage> createState() => _LaunchPageState();
-}
-
-class _LaunchPageState extends State<LaunchPage> {
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

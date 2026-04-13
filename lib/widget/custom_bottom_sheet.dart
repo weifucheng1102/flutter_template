@@ -44,14 +44,14 @@ class CustomButtomSheet {
   }
 
   ///多个选择
-  static showMultiChoiceModalBottomSheet(
+  static Future<dynamic> showMultiChoiceModalBottomSheet(
     BuildContext context, {
     required List options,
     required List selectIndex,
     String? title,
     MultClickCallback? multClickCallback,
   }) async {
-    List selected = selectIndex;
+    final List selected = selectIndex;
     return showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,

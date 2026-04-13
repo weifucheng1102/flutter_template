@@ -15,25 +15,16 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:oktoast/oktoast.dart';
 
 import 'app/config/app_config.dart';
-import 'app/config/brn_theme_config.dart';
+import 'app/core/app_bootstrap.dart';
 import 'app/controller/theme_controller.dart';
-import 'page/launch/agreement_notice.dart';
-import 'page/launch/launch_page.dart';
+import 'app/routes/app_pages.dart';
+import 'app/routes/app_routes.dart';
 
 void main() async {
-  //brn 配置
-  WidgetsFlutterBinding.ensureInitialized();
-  await GetStorage.init();
-  Get.put(ThemeController());
-  BrnInitializer.register(
-    allThemeConfig:
-        BrnConfigUtils.buildAllConfig(ThemeController.to.colors.mainColor),
-  );
-  runApp(const MyApp());
+  await AppBootstrap.run(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -49,7 +40,7 @@ class MyApp extends StatelessWidget {
           builder: (themeController) {
             return OKToast(
               child: GetMaterialApp(
-                title: '',
+                title: 'flutter_template_${AppConfig.envName}',
 
                 ///右上角debug角标
                 debugShowCheckedModeBanner: false,
@@ -79,7 +70,9 @@ class MyApp extends StatelessWidget {
                     );
                   },
                 ),
-                home: isFirst ? const AgreementNotice() : const LaunchPage(),
+                initialRoute: AppRoutes.bootstrap,
+                getPages: AppPages.pages,
+                unknownRoute: AppPages.unknownRoute,
               ),
             );
           },

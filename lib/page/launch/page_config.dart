@@ -29,7 +29,7 @@ class _PageConfigState extends State<PageConfig> {
     // }
   }
 
-  getConfig() {
+  void getConfig() {
     // ServiceRequest.post(
     //   '/app/kdgServiceConfig/details.json',
     //   data: {},

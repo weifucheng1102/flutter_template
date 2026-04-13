@@ -20,7 +20,7 @@ import 'package:photo_view/photo_view_gallery.dart';
 typedef PageChanged = void Function(int index);
 
 class PhotoPreview extends StatefulWidget {
-  final List galleryItems; //图片列表
+  final List<String> galleryItems; //图片列表
   final int defaultImage; //默认第几张
   final PageChanged? pageChanged; //切换图片回调
   final Axis direction; //图片查看方向
@@ -37,7 +37,7 @@ class PhotoPreview extends StatefulWidget {
     this.isLocal = false,
   });
   @override
-  _PhotoPreviewState createState() => _PhotoPreviewState();
+  State<PhotoPreview> createState() => _PhotoPreviewState();
 }
 
 class _PhotoPreviewState extends State<PhotoPreview> {

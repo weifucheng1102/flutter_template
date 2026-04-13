@@ -64,7 +64,6 @@ class ThemeController extends GetxController {
       case ThemeMode.system:
         return 'system';
       case ThemeMode.light:
-      default:
         return 'light';
     }
   }

@@ -1,5 +1,4 @@
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'empty_view.dart';
@@ -13,7 +12,7 @@ class CustomRefresh extends StatefulWidget {
   final Header? header;
   final Footer? footer;
   const CustomRefresh({
-    Key? key,
+    super.key,
     required this.count,
     required this.child,
     this.onLoad,
@@ -21,7 +20,7 @@ class CustomRefresh extends StatefulWidget {
     this.emptyWidget,
     this.header,
     this.footer,
-  }) : super(key: key);
+  });
 
   @override
   State<CustomRefresh> createState() => _CustomRefreshState();

@@ -11,7 +11,7 @@ class ImageGridView extends StatefulWidget {
   final bool isEdit;
 
   ///图片列表
-  final List imageList;
+  final List<String> imageList;
 
   ///一行数量
   final int crossAxisCount;
@@ -20,10 +20,10 @@ class ImageGridView extends StatefulWidget {
   final int? maxImageLength;
 
   ///删除图片回调
-  final Function(int)? delectCallBack;
+  final void Function(int)? delectCallBack;
 
   ///添加图片回调
-  final Function? addCallBack;
+  final VoidCallback? addCallBack;
 
   final String? addImage;
 
@@ -50,18 +50,18 @@ class ImageGridView extends StatefulWidget {
     this.ratio,
     this.title,
     this.required = false,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
-  _ImageGridViewState createState() => _ImageGridViewState();
+  State<ImageGridView> createState() => _ImageGridViewState();
 }
 
 class _ImageGridViewState extends State<ImageGridView> {
   @override
   Widget build(BuildContext context) {
     return widget.imageList.isEmpty && !widget.isEdit
-        ? Container()
+        ? const SizedBox.shrink()
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -83,7 +83,7 @@ class _ImageGridViewState extends State<ImageGridView> {
                         widget.title!,
                         style: TextStyle(
                           fontSize: 28.sp,
-                          color: Color(0xff040000),
+                          color: const Color(0xff040000),
                         ),
                       ),
                     ],
@@ -108,16 +108,9 @@ class _ImageGridViewState extends State<ImageGridView> {
   }
 
   List<Widget> listItems() {
-    List<Widget> list = [];
-    for (var i = 0; i < widget.imageList.length; i++) {
-      String url = widget.imageList[i];
-      // if (!url.contains('x-oss-process=')) {
-      //   if (widget.isVideo != null && widget.isVideo!) {
-      //     url = '$url?x-oss-process=video/snapshot,t_0,h_300';
-      //   } else {
-      //     url = '$url?x-oss-process=image/resize,h_300,m_lfit';
-      //   }
-      // }
+    final List<Widget> list = <Widget>[];
+    for (int i = 0; i < widget.imageList.length; i++) {
+      final String url = widget.imageList[i];
       list.add(
         Stack(
           children: [
@@ -149,8 +142,7 @@ class _ImageGridViewState extends State<ImageGridView> {
                       child: GestureDetector(
                         behavior: HitTestBehavior.opaque,
                         onTap: () {
-                          print('2');
-                          widget.delectCallBack!(i);
+                          widget.delectCallBack?.call(i);
                         },
                         child: Image.asset(
                           'images/delete_image.png',
@@ -162,9 +154,18 @@ class _ImageGridViewState extends State<ImageGridView> {
                   Visibility(
                     visible: widget.isVideo != null && widget.isVideo!,
                     child: Center(
-                      child: Image.asset(
-                        'images/video_play.png',
-                        width: 60.w,
+                      child: Container(
+                        width: 72.w,
+                        height: 72.w,
+                        decoration: const BoxDecoration(
+                          color: Color(0x80000000),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.play_arrow_rounded,
+                          color: Colors.white,
+                          size: 44.w,
+                        ),
                       ),
                     ),
                   ),
@@ -180,21 +181,30 @@ class _ImageGridViewState extends State<ImageGridView> {
             widget.imageList.length < widget.maxImageLength!)) {
       list.add(
         GestureDetector(
-          onTap: () {
-            if (widget.addCallBack != null) {
-              widget.addCallBack!();
-            }
-          },
+          onTap: widget.addCallBack,
           child: Padding(
             padding: EdgeInsets.only(top: 5.w, right: 5.w),
-            // padding: EdgeInsets.zero,
-            child: Image.asset(
-              widget.addImage == null
-                  ? 'images/add_image.png'
-                  : widget.addImage!,
-              fit: BoxFit.fill,
+            child: widget.addImage == null
+                ? Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF4F6F7),
+                      borderRadius: BorderRadius.circular(24.w),
+                      border: Border.all(
+                        color: const Color(0xFFE4E4E4),
+                        width: 1.w,
+                      ),
+                    ),
+                    child: Icon(
+                      Icons.add_rounded,
+                      size: 56.w,
+                      color: const Color(0xFF999999),
+                    ),
+                  )
+                : Image.asset(
+                    widget.addImage!,
+                    fit: BoxFit.fill,
+                  ),
             ),
-          ),
         ),
       );
     }

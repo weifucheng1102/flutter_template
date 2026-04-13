@@ -19,13 +19,13 @@ class CustomRichText extends StatelessWidget {
   final Map<String, VoidCallback>? onTapMap; // 点击回调
 
   const CustomRichText({
-    Key? key,
+    super.key,
     required this.text,
     required this.highlights,
     this.defaultStyle,
     this.caseSensitive = true,
     this.onTapMap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
