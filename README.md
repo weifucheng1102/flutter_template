@@ -25,6 +25,7 @@
 
 为了方便后续人工开发和 AI 协作，模板补充了结构文档和代理说明：
 
+- `CHANGELOG.md`：模板版本演进记录
 - `docs/template-architecture.md`：目录职责和结构边界
 - `docs/template-startup-flow.md`：启动链路说明
 - `docs/template-customization-checklist.md`：新项目改造清单
