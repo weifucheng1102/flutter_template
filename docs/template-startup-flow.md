@@ -77,9 +77,15 @@ main.dart
 
 ### `LaunchPage`
 
-负责承接真正的业务壳页面。
+负责承接真正的业务壳页面和登录后的初始化任务。
 
 当前 `LaunchPage -> NavigatePage`，而 `NavigatePage` 只是一个基础底部导航骨架。
+
+模板当前把更新检测挂在 `LaunchPage`，而不是 `BootstrapPage`。原因是：
+
+- `BootstrapPage` 应尽量只负责启动分流
+- 更新检测属于进入主业务壳后的初始化任务
+- 这样不会把启动页职责继续做重
 
 ## 为什么这样设计
 

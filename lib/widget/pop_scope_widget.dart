@@ -9,6 +9,7 @@
  * Copyright (c) 2025 by 魏, All Rights Reserved. 
  */
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:oktoast/oktoast.dart';
@@ -28,8 +29,16 @@ class PopScopeWidget extends StatefulWidget {
 
 class _PopScopeWidgetState extends State<PopScopeWidget> {
   int _flag = 0;
+
   @override
   Widget build(BuildContext context) {
+    // 双击返回退出只在 Android 主壳页场景下保留，避免影响 iOS 和其他平台体验。
+    final bool enableExitOnBack =
+        !kIsWeb && defaultTargetPlatform == TargetPlatform.android;
+    if (!enableExitOnBack) {
+      return widget.child;
+    }
+
     return PopScope(
       canPop: widget.canPop,
       onPopInvokedWithResult: (didPop, result) {

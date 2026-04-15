@@ -114,7 +114,8 @@ bash scripts/run_prod.sh
 1. 进入 `BootstrapPage`
 2. 未同意协议，跳转协议页
 3. 已同意协议但未登录，跳转登录页
-4. 已登录，进入主壳页面
+4. 已登录，进入 `LaunchPage`
+5. `LaunchPage` 承接主壳初始化任务，例如更新检测
 
 相关文件：
 
@@ -122,6 +123,7 @@ bash scripts/run_prod.sh
 - `lib/page/launch/agreement_notice.dart`
 - `lib/page/auth/login_page.dart`
 - `lib/page/launch/launch_page.dart`
+- `lib/app/core/update/app_update_service.dart`
 
 ## 路由骨架
 
@@ -152,12 +154,14 @@ bash scripts/run_prod.sh
 模板的请求入口是 `lib/app/utils/service_request.dart`，当前特性：
 
 - 单例 `Dio`
+- `ApiResponse<T>` 泛型响应模型
 - 统一超时
 - 拦截器日志
 - token 自动注入
 - 统一错误兜底
 - `baseUrl` 未配置时直接拦截
 
+新项目优先使用泛型请求入口，把页面层从 `Map<String, dynamic>` 解耦出来。
 如果你后续项目接口协议不是 `result/info` 这种格式，建议优先改这里，不要在业务页到处补判断。
 
 ## 新项目落地建议
