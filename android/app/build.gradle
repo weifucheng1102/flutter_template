@@ -7,6 +7,8 @@ plugins {
 def keystorePropertiesFile = rootProject.file("key.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+def buildDate = new Date().format("MMdd", TimeZone.getTimeZone("Asia/Shanghai"))
+
 android {
     namespace = "com.app.flutter_template"
     compileSdk = flutter.compileSdkVersion
@@ -55,4 +57,38 @@ android {
 
 flutter {
     source = "../.."
+}
+
+android.applicationVariants.all { variant ->
+    variant.outputs.all { output ->
+        if (output.outputFileName?.endsWith(".apk")) {
+            def apkVersionName = variant.versionName ?: flutter.versionName
+            output.outputFileName = "app-${variant.buildType.name}-v${apkVersionName}-${buildDate}.apk"
+        }
+    }
+
+    def assembleTask = variant.hasProperty("assembleProvider")
+        ? variant.assembleProvider.get()
+        : variant.assemble
+
+    assembleTask.doLast {
+        def flutterApkDir = new File("${project.buildDir}/outputs/flutter-apk")
+        def apkVersionName = variant.versionName ?: flutter.versionName
+        def flutterBaseName = "app"
+
+        if (variant.flavorName != null && !variant.flavorName.isEmpty()) {
+            flutterBaseName += "-${variant.flavorName.toLowerCase()}"
+        }
+
+        flutterBaseName += "-${variant.buildType.name}"
+
+        def defaultFlutterApk = new File(flutterApkDir, "${flutterBaseName}.apk")
+        if (defaultFlutterApk.exists()) {
+            project.copy {
+                from defaultFlutterApk
+                into flutterApkDir
+                rename { "${flutterBaseName}-v${apkVersionName}-${buildDate}.apk" }
+            }
+        }
+    }
 }

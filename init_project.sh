@@ -54,6 +54,12 @@ dart run change_app_package_name:main "$NEW_PACKAGE"
 echo "🔧 修改 pubspec.yaml 项目名为: $NEW_NAME"
 sed -i '' "s/^name: .*/name: $NEW_NAME/" pubspec.yaml
 
+# 修改应用显示名
+echo "🔧 同步修改 Android/iOS 应用显示名为: $NEW_NAME"
+sed -i '' "s/android:label=\"[^\"]*\"/android:label=\"$NEW_NAME\"/" android/app/src/main/AndroidManifest.xml
+/usr/libexec/PlistBuddy -c "Set :CFBundleDisplayName $NEW_NAME" ios/Runner/Info.plist
+/usr/libexec/PlistBuddy -c "Set :CFBundleName $NEW_NAME" ios/Runner/Info.plist
+
 # Flutter 清理并获取依赖
 flutter clean
 flutter pub get
